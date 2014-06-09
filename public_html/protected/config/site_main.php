@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'name' => 'eve-order',
+    'name' => 'EVE Manager',
     'basePath' => SITE_PATH_PROTECTED,
     'layoutPath' => SITE_PATH_PROTECTED . 'views' . DS . '_layout',
     'import' => require(SITE_PATH_CONFIG . '_import.php'),

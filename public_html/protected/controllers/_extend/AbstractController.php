@@ -3,7 +3,7 @@
 class AbstractController extends CController
 {
     public $layout = 'default';
-    public $sTitle;
+    public $sTitle = 'Welcome!';
 
     /**
      * @param null|string        $sVarName
