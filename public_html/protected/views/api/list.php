@@ -8,7 +8,17 @@
                     <h1 class="panel-title">Added api.</h1>
                 </div>
                 <div class="panel-body">
-                    <p>Simple api list.</p>
+                    <?php if ($aList): ?>
+                        <ul class="list-group">
+                            <?php foreach ($aList as $oList): ?>
+                                <li class="list-group-item"># <?php echo $oList->id; ?> keyID: <?php echo $oList->keyID; ?> vCode: <?php echo $oList->vCode; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p class="alert alert-warning">No api were added.</p>
+                    <?php
+                    endif; ?>
+
                 </div>
             </div>
             <!-- panel -->
