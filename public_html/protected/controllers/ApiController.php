@@ -47,6 +47,9 @@ class ApiController extends AbstractController
                 ->doFetch()
                 ->doParse()
                 ->doUpdate();
+            $this->setFlash('success', 'Api #' . $oApi->id . ' was updated.');
+        } else {
+            $this->setFlash('danger', 'Such api doesn\'t exist.');
         }
 
         $this->redirect($this->createUrl('api/list'));
@@ -60,7 +63,10 @@ class ApiController extends AbstractController
         $oApi = Api::model()->findByPk($sApiID);
 
         if ($oApi) {
+            $this->setFlash('success', 'Api was deleted.');
             $oApi->delete();
+        } else {
+            $this->setFlash('danger', 'Such api doesn\'t exist.');
         }
 
         $this->redirect($this->createUrl('api/list'));

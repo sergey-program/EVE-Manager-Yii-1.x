@@ -25,4 +25,18 @@ class AbstractController extends CController
 
         return $bReturn;
     }
+
+    /**
+     * @param string $sKey (wFlashMessage)
+     * @param string $sValue
+     *
+     * @return $this
+     */
+    public function setFlash($sKey, $sValue)
+    {
+        Yii::app()->user->setFlash($sKey, $sValue);
+
+        return $this;
+    }
+
 }
