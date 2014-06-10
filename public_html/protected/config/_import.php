@@ -4,6 +4,12 @@ return array(
     'application.components._extend.*',
     'application.components.*',
     //
+    'application.call._extend.*',
+    'application.call.*',
+    //
+    'application.call.account.*',
+    'application.call.account.characters.*',
+    //
     'application.widgets._extend.*',
     'application.widgets.*',
     //
