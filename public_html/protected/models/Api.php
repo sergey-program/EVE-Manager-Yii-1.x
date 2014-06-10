@@ -46,6 +46,8 @@ class Api extends AbstractModel
      */
     public function relations()
     {
-        return array();
+        return array(
+            'aCharacter' => array(self::HAS_MANY, 'ApiCharacter', 'apiID')
+        );
     }
 }

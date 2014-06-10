@@ -17,6 +17,13 @@ class cApi
         }
     }
 
+    private function assignCharacters()
+    {
+        foreach ($this->oApi->aCharacter as $oCharacter) {
+            $this->aCharacter[] = new cCharacter($oCharacter);
+        }
+    }
+
     /**
      * Custom set model;
      *
@@ -27,8 +34,17 @@ class cApi
     public function setModel(Api $oApi)
     {
         $this->oApi = $oApi;
+        $this->assignCharacters();
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCharacters()
+    {
+        return !empty($this->aCharacter);
     }
 
     /**
@@ -37,14 +53,6 @@ class cApi
     public function getCharacters()
     {
         return $this->aCharacter;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCharacters()
-    {
-        return empty($this->aCharacter);
     }
 
     /**
