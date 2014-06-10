@@ -38,7 +38,7 @@
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="alert alert-warning text-center">No api were added.</p>
+                <p class="alert alert-warning text-center">No api.</p>
             <?php endif; ?>
             <!-- panel -->
         </div>

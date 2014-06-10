@@ -50,4 +50,16 @@ class Api extends AbstractModel
             'aCharacter' => array(self::HAS_MANY, 'ApiCharacter', 'apiID')
         );
     }
+
+    /**
+     * @return void
+     */
+    public function afterDelete()
+    {
+        foreach ($this->aCharacter as $oCharacter) {
+            $oCharacter->delete();
+        }
+
+        parent::afterDelete();
+    }
 }

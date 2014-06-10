@@ -2,6 +2,11 @@
 
 class cCallParser
 {
+    /**
+     * @param SimpleXmlIterator|SimpleXmlElement $oXml
+     *
+     * @return array|null
+     */
     public static function getXmlAttr($oXml)
     {
         $aResult = null;
