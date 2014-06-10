@@ -13,7 +13,7 @@ class ApiController extends AbstractController
             if ($oApi->validate()) {
                 $oApi->save();
 
-                $this->redirect($this->createUrl('api/list'));
+                $this->redirect($this->createUrl('api/update', array('sApiID' => $oApi->id)));
             }
         }
 
@@ -36,17 +36,19 @@ class ApiController extends AbstractController
         $oApi = Api::model()->findByPk($sApiID);
 
         if ($oApi) {
-            $oCall = new CallAccountCharacters();
-            $oCall
-                ->getUrlObject()
-                ->setVarArray(array('keyID' => $oApi->keyID, 'vCode' => $oApi->vCode));
+            $oCallChar = new CallAccountCharacters();
+            $oCallChar->getUrlObject()->setVarArray(array('keyID' => $oApi->keyID, 'vCode' => $oApi->vCode));
+            $oCallInfo = new CallAccountApiKeyInfo();
+            $oCallInfo->getUrlObject()->setVarArray(array('keyID' => $oApi->keyID, 'vCode' => $oApi->vCode));
 
             $oExecutor = new cCallExecutor();
             $oExecutor
-                ->addCall($oCall)
+                ->addCall($oCallChar)
+                ->addCall($oCallInfo)
                 ->doFetch()
                 ->doParse()
                 ->doUpdate();
+
             $this->setFlash('success', 'Api #' . $oApi->id . ' was updated.');
         } else {
             $this->setFlash('danger', 'Such api doesn\'t exist.');

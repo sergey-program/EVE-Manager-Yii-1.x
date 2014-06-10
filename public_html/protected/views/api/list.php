@@ -20,11 +20,24 @@
                                 <li class="list-group-item">vCode: <?php echo substr($cApi->getVCode(), 0, 20); ?>...</li>
                             </ul>
 
+                            <?php if ($cApi->hasInfo()): ?>
+                                <h3>Key Info</h3>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Type: <?php echo $cApi->getType(); ?></li>
+                                    <li class="list-group-item">Access Mask: <?php echo $cApi->getAccessMask(); ?></li>
+                                </ul>
+                            <?php else: ?>
+                                <p class="text-muted">Key Info not updated...</p>
+                            <?php endif; ?>
+
                             <?php if ($cApi->hasCharacters()): ?>
                                 <h3>Characters</h3>
                                 <ul class="list-group">
                                     <?php foreach ($cApi->getCharacters() as $cCharacter): ?>
-                                        <li class="list-group-item"><?php echo $cCharacter->getCharacterID(); ?> <?php echo $cCharacter->getCharacterName(); ?></li>
+                                        <li class="list-group-item">
+                                            <span><?php echo $cCharacter->getCharacterName(); ?></span>
+                                            <div class="pull-right text-muted" title="characterID"><?php echo $cCharacter->getCharacterID(); ?></div>
+                                        </li>
                                     <?php endforeach; ?>
                                 </ul>
                             <?php else: ?>

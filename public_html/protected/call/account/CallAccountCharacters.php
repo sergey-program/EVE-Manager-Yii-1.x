@@ -21,7 +21,7 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
     }
 
     /**
-     * @return bool
+     * @return void
      */
     public function updateResult()
     {
@@ -29,7 +29,7 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
             $oApi = Api::model()->findByAttributes(array('keyID' => $this->getUrlObject()->getVar('keyID')));
 
             foreach ($this->aData as $aCharacter) {
-                $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $aCharacter['characterID']));
+                $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $aCharacter['characterID'], 'apiID' => $oApi->id));
 
                 if (!$oCharacter) {
                     $oCharacter = new ApiCharacter('create');
