@@ -37,9 +37,18 @@ class ApiController extends AbstractController
 
         if ($oApi) {
             $oCallChar = new CallAccountCharacters();
-            $oCallChar->getUrlObject()->setVarArray(array('keyID' => $oApi->keyID, 'vCode' => $oApi->vCode));
+            $oCallChar
+                ->getStorage()
+                ->setVar('keyID', $oApi->keyID, cCallStorage::ALIAS_URL)
+                ->setVar('vCode', $oApi->vCode, cCallStorage::ALIAS_URL)
+                ->setVar('apiID', $oApi->id);
+
             $oCallInfo = new CallAccountApiKeyInfo();
-            $oCallInfo->getUrlObject()->setVarArray(array('keyID' => $oApi->keyID, 'vCode' => $oApi->vCode));
+            $oCallInfo
+                ->getStorage()
+                ->setVar('keyID', $oApi->keyID, cCallStorage::ALIAS_URL)
+                ->setVar('vCode', $oApi->vCode, cCallStorage::ALIAS_URL)
+                ->setVar('apiID', $oApi->id);
 
             $oExecutor = new cCallExecutor();
             $oExecutor

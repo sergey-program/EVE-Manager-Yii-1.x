@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 define ('DS', DIRECTORY_SEPARATOR);
 define ('SITE_PATH_ROOT', dirname(__FILE__) . DS . '..' . DS); //
 define ('SITE_PATH_SITE', SITE_PATH_ROOT . 'public_html' . DS); // public_html/
@@ -10,7 +13,8 @@ define ('SITE_PATH_EXTENSION', SITE_PATH_PROTECTED . 'extensions' . DS); // publ
 $sYii = SITE_PATH_ROOT . 'framework-1.1.14/yii.php';
 $sConfig = SITE_PATH_CONFIG . 'site_main.php';
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
+define('YII_DEBUG', true);
+// defined('YII_DEBUG') or
 
 require_once($sYii);
 

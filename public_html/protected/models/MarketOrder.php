@@ -1,17 +1,23 @@
 <?php
 
-class ApiCharacter extends AbstractModel
+class MarketOrder extends AbstractModel
 {
     public $id;
-    public $apiID;
     public $characterID;
-    public $characterName;
-    public $corporationID;
-    public $corporationName;
-    public $allianceID;
-    public $allianceName;
-    public $factionID;
-    public $factionName;
+    public $orderID;
+    public $stationID;
+    public $volEntered;
+    public $volRemaining;
+    public $minVolume;
+    public $orderState;
+    public $typeID;
+    public $range;
+    public $accountKey;
+    public $duration;
+    public $escrow;
+    public $price;
+    public $bid;
+    public $issued;
 
     /**
      * @param string $sClass
@@ -28,7 +34,7 @@ class ApiCharacter extends AbstractModel
      */
     public function tableName()
     {
-        return '_api_character';
+        return '_market_order';
     }
 
     /**
@@ -37,9 +43,7 @@ class ApiCharacter extends AbstractModel
     public function rules()
     {
         return array(
-            // create
-            array('apiID, characterID, characterName, corporationID, corporationName, allianceID, allianceName', 'required', 'on' => 'create'),
-            array('factionID, factionName', 'safe', 'on' => 'create')
+            array('characterID, orderID, stationID, volEntered, volRemaining, minVolume, orderState, typeID, range, accountKey, duration, escrow, price, bid, issued', 'required', 'on' => 'create')
         );
     }
 
@@ -56,8 +60,6 @@ class ApiCharacter extends AbstractModel
      */
     public function relations()
     {
-        return array(
-            'oApi' => array(self::BELONGS_TO, 'Api', 'apiID')
-        );
+        return array();
     }
 }

@@ -8,7 +8,7 @@ return array(
     'application.call.*',
     //
     'application.call.account.*',
-    'application.call.account.characters.*',
+    'application.call.character.*',
     //
     'application.widgets._extend.*',
     'application.widgets.*',

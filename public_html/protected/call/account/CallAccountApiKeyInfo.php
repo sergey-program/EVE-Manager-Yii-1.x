@@ -9,6 +9,18 @@ class CallAccountApiKeyInfo extends CallAbstract implements CallInterface
     /**
      * @return void
      */
+    public function setupStorage()
+    {
+        $this
+            ->getStorage()
+            ->setRequire('keyID', cCallStorage::ALIAS_URL)
+            ->setRequire('vCode', cCallStorage::ALIAS_URL)
+            ->setRequire('apiID');
+    }
+
+    /**
+     * @return void
+     */
     public function parseResult()
     {
         if (!$this->cCallResult->isError()) {
@@ -22,28 +34,25 @@ class CallAccountApiKeyInfo extends CallAbstract implements CallInterface
      */
     public function updateResult()
     {
-        if (!empty($this->aData)) {
-            $oApi = Api::model()->findByAttributes(array('keyID' => $this->getUrlObject()->getVar('keyID')));
+        if (!empty($this->aData) && $this->getStorage()->checkRequire()) {
+            $sApiID = $this->getStorage()->getVar('apiID');
+            $oApiInfo = ApiInfo::model()->findByAttributes(array('apiID' => $sApiID));
 
-            if ($oApi) {
-                $oApiInfo = ApiInfo::model()->findByAttributes(array('apiID' => $oApi->id));
+            if ($oApiInfo) {
+                $oApiInfo->setScenario('create');
+            } else {
+                $oApiInfo = new ApiInfo('create');
+            }
 
-                if (!$oApiInfo) {
-                    $oApiInfo = new ApiInfo('create');
-                } else {
-                    $oApiInfo->setScenario('create');
-                }
+            $oApiInfo->attributes = array(
+                'apiID' => $sApiID,
+                'accessMask' => $this->aData['accessMask'],
+                'type' => $this->aData['type'],
+                'expires' => ($this->aData['expires']) ? date($this->aData['expires']) : null
+            );
 
-                $oApiInfo->attributes = array(
-                    'apiID' => $oApi->id,
-                    'accessMask' => $this->aData['accessMask'],
-                    'type' => $this->aData['type'],
-                    'expires' => ($this->aData['expires']) ? date($this->aData['expires']) : null
-                );
-
-                if ($oApiInfo->validate()) {
-                    $oApiInfo->save();
-                }
+            if ($oApiInfo->validate()) {
+                $oApiInfo->save();
             }
         }
     }

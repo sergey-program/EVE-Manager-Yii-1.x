@@ -2,6 +2,10 @@
 
 class Api extends AbstractModel
 {
+    public $id;
+    public $keyID;
+    public $vCode;
+
     /**
      * @param string $sClass
      *

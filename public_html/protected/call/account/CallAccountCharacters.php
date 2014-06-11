@@ -9,6 +9,18 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
     /**
      * @return void
      */
+    public function setupStorage()
+    {
+        $this
+            ->getStorage()
+            ->setRequire('keyID', cCallStorage::ALIAS_URL)
+            ->setRequire('vCode', cCallStorage::ALIAS_URL)
+            ->setRequire('apiID');
+    }
+
+    /**
+     * @return void
+     */
     public function parseResult()
     {
         if (!$this->cCallResult->isError()) {
@@ -25,20 +37,20 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
      */
     public function updateResult()
     {
-        if (!empty($this->aData)) {
-            $oApi = Api::model()->findByAttributes(array('keyID' => $this->getUrlObject()->getVar('keyID')));
+        if (!empty($this->aData) && $this->getStorage()->checkRequire()) {
+            $sApiID = $this->getStorage()->getVar('apiID');
 
             foreach ($this->aData as $aCharacter) {
-                $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $aCharacter['characterID'], 'apiID' => $oApi->id));
+                $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $aCharacter['characterID'], 'apiID' => $sApiID));
 
-                if (!$oCharacter) {
-                    $oCharacter = new ApiCharacter('create');
-                } else {
+                if ($oCharacter) {
                     $oCharacter->setScenario('create');
+                } else {
+                    $oCharacter = new ApiCharacter('create');
                 }
 
                 $oCharacter->attributes = array(
-                    'apiID' => $oApi->id,
+                    'apiID' => $sApiID,
                     'characterID' => $aCharacter['characterID'],
                     'characterName' => $aCharacter['name'],
                     'corporationID' => $aCharacter['corporationID'],

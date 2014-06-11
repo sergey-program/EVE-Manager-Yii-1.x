@@ -2,8 +2,9 @@
 
 abstract class CallAbstract implements CallInterface
 {
-    protected $cCallUrl; // cCallUrl object
-    protected $cCallResult; // cCallResult object
+    protected $cCallUrl;
+    protected $cCallResult;
+    protected $cCallStorage;
     private $sUniqueID; // unique id for call
     private $hCurl; // curl handle
     // settings for cUrl
@@ -15,6 +16,7 @@ abstract class CallAbstract implements CallInterface
      */
     public function __construct()
     {
+        $this->setupStorage();
         $this->sUniqueID = uniqid();
         $this->curlHandleCreate();
     }
@@ -37,22 +39,31 @@ abstract class CallAbstract implements CallInterface
      * Return call url;
      *
      * @return string
+     * @throws Exception
      */
     public function getUrl()
     {
+        if (!$this->cCallUrl) {
+            $this->cCallUrl = new cCallUrl($this->sFileType, $this->sFileName);
+
+            if ($this->getStorage()->checkRequire(cCallStorage::ALIAS_URL)) {
+                $this->cCallUrl->setVarArray($this->getStorage()->getVarsByAlias(cCallStorage::ALIAS_URL));
+            }
+        }
+
         return $this->cCallUrl->getUrl();
     }
 
     /**
-     * @return cCallUrl
+     * @return cCallStorage
      */
-    public function getUrlObject()
+    public function getStorage()
     {
-        if (!$this->cCallUrl) {
-            $this->cCallUrl = new cCallUrl($this->sFileType, $this->sFileName);
+        if (!$this->cCallStorage) {
+            $this->cCallStorage = new cCallStorage();
         }
 
-        return $this->cCallUrl;
+        return $this->cCallStorage;
     }
 
     /**
