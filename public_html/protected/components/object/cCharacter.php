@@ -66,14 +66,21 @@ class cCharacter extends cCharacterAbstract
         return $this->oCharacter->factionName;
     }
 
+
+    public function getOrdersAsList()
+    {
+        $cLoaderOrder = new cLoaderOrder($this->getCharacterID());
+        return $cLoaderOrder->getAll(cLoaderOrder::AS_LIST);
+    }
+
     /**
      * @return array
      */
-    public function getOrders()
+    public function getOrdersAsStation()
     {
-        $aOrder = array();
+        $cLoaderOrder = new cLoaderOrder($this->getCharacterID());
 
-        return $aOrder;
+        return $cLoaderOrder->getAll(cLoaderOrder::AS_STATION);
     }
 
     /**

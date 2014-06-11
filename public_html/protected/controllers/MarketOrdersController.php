@@ -1,6 +1,6 @@
 <?php
 
-class OrderController extends AbstractController
+class MarketOrdersController extends AbstractController
 {
     /**
      *
@@ -30,7 +30,7 @@ class OrderController extends AbstractController
 
         $oExecutor->doFetch()->doParse()->doUpdate();
 
-        $this->redirect($this->createUrl('/market-orders'));
+        $this->redirect($this->createUrl('character/list'));
     }
 
     /**
@@ -41,5 +41,13 @@ class OrderController extends AbstractController
         $aCharacter = cLoaderCharacter::all();
 
         $this->render('index', array('aCharacter' => $aCharacter));
+    }
+
+    /**
+     * @param string|int $sCharacterID
+     */
+    public function actionCharacter($sCharacterID)
+    {
+        $this->render('character', array('cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID)));
     }
 }

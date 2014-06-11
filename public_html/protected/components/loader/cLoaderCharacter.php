@@ -15,4 +15,16 @@ class cLoaderCharacter
 
         return $aCharacter;
     }
+
+    /**
+     * @param string|int $sCharacterID
+     *
+     * @return cCharacter
+     */
+    public static function byCharacterID($sCharacterID)
+    {
+        $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $sCharacterID));
+
+        return new cCharacter($oCharacter);
+    }
 }

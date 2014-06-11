@@ -39,10 +39,9 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Market <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Character(s) <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Orders</a></li>
-                        <li><a href="#">Some</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('character/list'); ?>">Show All</a></li>
                     </ul>
                 </li>
             </ul>
@@ -51,7 +50,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Update All <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo Yii::app()->createUrl('market/order/update'); ?>">Orders</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('marketOrders/update'); ?>">Orders</a></li>
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li class="divider"></li>
