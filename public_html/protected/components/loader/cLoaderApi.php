@@ -1,9 +1,7 @@
 <?php
 
-class cApiLoader
+class cLoaderApi
 {
-    private $aApi = array();
-
     /**
      * @return array
      */

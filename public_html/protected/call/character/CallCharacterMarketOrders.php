@@ -43,6 +43,8 @@ class CallCharacterMarketOrders extends CallAbstract
         if (!empty($this->aData) && $this->getStorage()->checkRequire()) {
             $sCharacterID = $this->getStorage()->getVar('characterID', cCallStorage::ALIAS_URL);
 
+            MarketOrder::model()->updateAll(array('characterID' => $sCharacterID), 'orderState = :orderState', array(':orderState' => MarketOrder::ORDER_STATE_CLOSED));
+
             foreach ($this->aData as $aOrder) {
                 $oOrder = MarketOrder::model()->findByAttributes(array('characterID' => $sCharacterID, 'orderID' => $aOrder['orderID']));
 

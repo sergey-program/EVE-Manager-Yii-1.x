@@ -7,7 +7,7 @@ class OrderController extends AbstractController
      */
     public function actionUpdate()
     {
-        $cApiLoader = cApiLoader::all();
+        $cApiLoader = cLoaderApi::all();
         $oExecutor = new cCallExecutor();
 
         foreach ($cApiLoader as $cApi) {
@@ -38,6 +38,8 @@ class OrderController extends AbstractController
      */
     public function actionIndex()
     {
-        $this->render('index', array());
+        $aCharacter = cLoaderCharacter::all();
+
+        $this->render('index', array('aCharacter' => $aCharacter));
     }
 }

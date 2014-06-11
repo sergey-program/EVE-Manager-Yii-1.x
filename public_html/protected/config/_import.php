@@ -3,10 +3,12 @@
 return array(
     'application.components._extend.*',
     'application.components.*',
+    'application.components.loader.*',
+    'application.components.call.*',
+    'application.components.object.*',
     //
     'application.call._extend.*',
     'application.call.*',
-    //
     'application.call.account.*',
     'application.call.character.*',
     //

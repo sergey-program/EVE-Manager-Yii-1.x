@@ -25,7 +25,7 @@ class ApiController extends AbstractController
      */
     public function actionList()
     {
-        $this->render('list', array('cApiList' => cApiLoader::all()));
+        $this->render('list', array('cApiList' => cLoaderApi::all()));
     }
 
     /**
