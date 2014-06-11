@@ -17,6 +17,7 @@ return array(
     //
     'application.models._extend.*',
     'application.models.*',
+    'application.models.dump.*',
     //
     'application.forms._extend.*',
     'application.forms.*',

@@ -36,11 +36,16 @@ class MarketOrdersController extends AbstractController
     /**
      *
      */
-    public function actionIndex()
+    public function actionStation($sCharacterID, $sStationID)
     {
-        $aCharacter = cLoaderCharacter::all();
 
-        $this->render('index', array('aCharacter' => $aCharacter));
+
+        $aData = array(
+            'cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID),
+            'cStation' => cLoaderStation::byStationID($sStationID)
+        );
+
+        $this->render('station', $aData);
     }
 
     /**
@@ -48,6 +53,10 @@ class MarketOrdersController extends AbstractController
      */
     public function actionCharacter($sCharacterID)
     {
-        $this->render('character', array('cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID)));
+        $aData = array(
+            'cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID)
+        );
+
+        $this->render('character', $aData);
     }
 }

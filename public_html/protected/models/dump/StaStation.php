@@ -1,6 +1,6 @@
 <?php
 
-class DumpStaStation extends AbstractModel
+class StaStation extends AbstractModel
 {
     public $stationID;
     public $security;
@@ -37,6 +37,22 @@ class DumpStaStation extends AbstractModel
     public function tableName()
     {
         return 'staStations';
+    }
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return array();
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return array();
     }
 
     /**

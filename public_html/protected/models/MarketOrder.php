@@ -67,6 +67,8 @@ class MarketOrder extends AbstractModel
      */
     public function relations()
     {
-        return array();
+        return array(
+            'oInvTypes' => array(self::BELONGS_TO, 'InvTypes', 'typeID')
+        );
     }
 }

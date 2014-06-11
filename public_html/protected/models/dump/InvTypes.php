@@ -1,6 +1,6 @@
 <?php
 
-class DumpInvTypes extends AbstractModel
+class InvTypes extends AbstractModel
 {
     public $typeID;
     public $groupID;
@@ -32,6 +32,22 @@ class DumpInvTypes extends AbstractModel
     public function tableName()
     {
         return 'invTypes';
+    }
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return array();
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return array();
     }
 
     /**

@@ -70,6 +70,7 @@ class cCharacter extends cCharacterAbstract
     public function getOrdersAsList()
     {
         $cLoaderOrder = new cLoaderOrder($this->getCharacterID());
+
         return $cLoaderOrder->getAll(cLoaderOrder::AS_LIST);
     }
 
@@ -84,10 +85,18 @@ class cCharacter extends cCharacterAbstract
     }
 
     /**
+     * @param string|int|null $sStationID
+     *
      * @return string|int
      */
-    public function getOrdersCount()
+    public function getOrdersCount($sStationID = null)
     {
-        return MarketOrder::model()->countByAttributes(array('characterID' => $this->getCharacterID(), 'orderState' => 0));
+        $aAttributes = array('characterID' => $this->getCharacterID(), 'orderState' => 0);
+
+        if ($sStationID) {
+            $aAttributes['stationID'] = $sStationID;
+        }
+
+        return MarketOrder::model()->countByAttributes($aAttributes);
     }
 }
