@@ -13,6 +13,7 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
     {
         $this
             ->getStorage()
+            ->setCallName('Characters')
             ->setRequire('keyID', cCallStorage::ALIAS_URL)
             ->setRequire('vCode', cCallStorage::ALIAS_URL)
             ->setRequire('apiID');
@@ -55,8 +56,8 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
                     'characterName' => $aCharacter['name'],
                     'corporationID' => $aCharacter['corporationID'],
                     'corporationName' => $aCharacter['corporationName'],
-                    'allianceID' => $aCharacter['allianceID'],
-                    'allianceName' => $aCharacter['allianceName'],
+                    'allianceID' => ($aCharacter['allianceID']) ? $aCharacter['allianceID'] : null,
+                    'allianceName' => $aCharacter['allianceName'] ? $aCharacter['allianceName'] : null,
                     'factionID' => $aCharacter['factionID'] ? $aCharacter['factionID'] : null,
                     'factionName' => $aCharacter['factionName'] ? $aCharacter['factionName'] : null
                 );

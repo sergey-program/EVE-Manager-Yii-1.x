@@ -38,8 +38,8 @@ class ApiCharacter extends AbstractModel
     {
         return array(
             // create
-            array('apiID, characterID, characterName, corporationID, corporationName, allianceID, allianceName', 'required', 'on' => 'create'),
-            array('factionID, factionName', 'safe', 'on' => 'create')
+            array('apiID, characterID, characterName, corporationID, corporationName', 'required', 'on' => 'create'),
+            array('allianceID, allianceName, factionID, factionName', 'safe', 'on' => 'create')
         );
     }
 

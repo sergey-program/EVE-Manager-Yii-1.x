@@ -13,6 +13,7 @@ class CallAccountApiKeyInfo extends CallAbstract implements CallInterface
     {
         $this
             ->getStorage()
+            ->setCallName('ApiKeyInfo')
             ->setRequire('keyID', cCallStorage::ALIAS_URL)
             ->setRequire('vCode', cCallStorage::ALIAS_URL)
             ->setRequire('apiID');
@@ -34,7 +35,7 @@ class CallAccountApiKeyInfo extends CallAbstract implements CallInterface
      */
     public function updateResult()
     {
-        if (!empty($this->aData) && $this->getStorage()->checkRequire()) {
+        if (!empty($this->aData) && $this->getStorage()->checkRequire('ApiKeyInfo')) {
             $sApiID = $this->getStorage()->getVar('apiID');
             $oApiInfo = ApiInfo::model()->findByAttributes(array('apiID' => $sApiID));
 

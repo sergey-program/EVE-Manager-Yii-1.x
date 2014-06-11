@@ -124,6 +124,8 @@ abstract class CallAbstract implements CallInterface
             print_r($aData);
             echo '</pre>';
         }
+
+        die();
     }
 
 }

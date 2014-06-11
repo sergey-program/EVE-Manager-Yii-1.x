@@ -13,6 +13,7 @@ class CallCharacterMarketOrders extends CallAbstract
     {
         $this
             ->getStorage()
+            ->setCallName('Character Marker Order')
             ->setRequire('keyID', cCallStorage::ALIAS_URL)
             ->setRequire('vCode', cCallStorage::ALIAS_URL)
             ->setRequire('characterID', cCallStorage::ALIAS_URL);

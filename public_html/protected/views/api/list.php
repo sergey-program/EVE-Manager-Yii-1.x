@@ -1,8 +1,6 @@
 <?php $this->sTitle = 'Api list'; ?>
 
 <div class="container">
-    <?php $this->widget('wFlashMessage'); ?>
-
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <?php if ($cApiList): ?>

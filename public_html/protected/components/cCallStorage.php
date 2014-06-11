@@ -1,12 +1,25 @@
 <?php
 
-class cCallStorage
+class cCallStorage extends cAbstract
 {
     const ALIAS_DEFAULT = 'alias_default';
     const ALIAS_URL = 'alias_url';
 
     private $aStorage = array();
     private $aRequire = array();
+    private $sCallName;
+
+    /**
+     * @param string $sCall
+     *
+     * @return $this
+     */
+    public function setCallName($sCall)
+    {
+        $this->sCallName = $sCall;
+
+        return $this;
+    }
 
     /**
      * @param string $sKey
@@ -37,10 +50,11 @@ class cCallStorage
 
     /**
      * @param string $sAlias
+     * @param string $sCallName
      *
      * @return bool
      */
-    public function checkRequire($sAlias = self::ALIAS_DEFAULT)
+    public function checkRequire($sAlias = self::ALIAS_DEFAULT, $sCallName = null)
     {
         $bResult = true;
 
@@ -50,6 +64,7 @@ class cCallStorage
             foreach ($this->aRequire[$sAlias] as $sRequireVar) {
                 // search in storage array
                 if (!isset($this->aStorage[$sAlias][$sRequireVar])) {
+                    $this->setFlash('danger', 'checkRequire. Variable <strong>' . $sRequireVar . '</strong> is required (' . $sAlias . ').' . ' For ' . $this->sCallName . ' call.');
                     $bResult = false;
                     break;
                 }

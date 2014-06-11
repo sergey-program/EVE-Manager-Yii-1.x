@@ -30,7 +30,7 @@ class OrderController extends AbstractController
 
         $oExecutor->doFetch()->doParse()->doUpdate();
 
-        //$this->redirect($this->createUrl('/market-orders'));
+        $this->redirect($this->createUrl('/market-orders'));
     }
 
     /**

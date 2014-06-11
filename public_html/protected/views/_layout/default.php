@@ -64,7 +64,7 @@
     </div>
     <!-- container -->
 </nav>
-
+<?php $this->widget('wFlashMessage'); ?>
 <?php echo $content; ?>
 
 </body>
