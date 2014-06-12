@@ -14,4 +14,6 @@ return array(
     'market-orders/update'      => 'marketOrders/update',
     'character/<sCharacterID:\d+>/market-orders'                            => 'marketOrders/character',
     'character/<sCharacterID:\d+>/market-orders/station/<sStationID:\d+>'   => 'marketOrders/station',
+
+    'update/static/conquerable-station-list'    => 'cnqStation/update'
 );

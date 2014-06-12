@@ -9,12 +9,7 @@ class cLoaderStation
      */
     public static function byStationID($sStationID)
     {
-        $cStation = new cStation();
-        $oStation = StaStation::model()->findByAttributes(array('stationID' => $sStationID));
-
-        if ($oStation) {
-            $cStation->setModel($oStation);
-        }
+        $cStation = new cStation($sStationID);
 
         return $cStation;
     }

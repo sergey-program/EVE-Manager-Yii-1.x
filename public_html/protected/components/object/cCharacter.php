@@ -66,22 +66,21 @@ class cCharacter extends cCharacterAbstract
         return $this->oCharacter->factionName;
     }
 
-
-    public function getOrdersAsList()
-    {
-        $cLoaderOrder = new cLoaderOrder($this->getCharacterID());
-
-        return $cLoaderOrder->getAll(cLoaderOrder::AS_LIST);
-    }
-
     /**
+     * @param string          $sType      Return type can be cLoaderOrder::AS_LIST or cLoaderOrder::AS_STATION.
+     * @param string|int|null $sStationID Filter for station.
+     *
      * @return array
      */
-    public function getOrdersAsStation()
+    public function getOrders($sType, $sStationID = null)
     {
-        $cLoaderOrder = new cLoaderOrder($this->getCharacterID());
+        $cLoaderOrder = new cLoaderOrder();
+        $cLoaderOrder
+            ->setCharacterID($this->getCharacterID())
+            ->setStationID($sStationID)
+            ->setResultAs($sType);
 
-        return $cLoaderOrder->getAll(cLoaderOrder::AS_STATION);
+        return $cLoaderOrder->getAll();
     }
 
     /**

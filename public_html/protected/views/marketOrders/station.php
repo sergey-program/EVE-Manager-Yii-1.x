@@ -19,7 +19,7 @@
             <!-- panel -->
             <?php if ($cCharacter->getOrdersCount($cStation->getStationID())): ?>
                 <ul class="list-group">
-                    <?php foreach ($cCharacter->getOrdersAsList() as $cOrder): ?>
+                    <?php foreach ($cCharacter->getOrders(cLoaderOrder::AS_LIST, $cStation->getStationID()) as $cOrder): ?>
                         <li class="list-group-item">
                             <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cOrder->getTypeID(); ?>_32.png">
                             <?php echo $cOrder->getTypeName(); ?>

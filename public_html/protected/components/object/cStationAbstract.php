@@ -13,7 +13,28 @@ class cStationAbstract
     {
         if (!is_null($sStationID)) {
             $this->sStationID = $sStationID;
+            $this->loadModel($sStationID);
         }
+    }
+
+    /**
+     *
+     */
+    private function loadModel($sStationID = null)
+    {
+        $sStationID = ($sStationID) ? $sStationID : $this->sStationID;
+        $oStaStation = StaStation::model()->findByAttributes(array('stationID' => $sStationID));
+
+        if ($oStaStation) {
+            $this->setModel($oStaStation);
+        }
+
+        $oCnqStation = ConquerableStation::model()->findByAttributes(array('stationID' => $sStationID));
+
+        if ($oCnqStation) {
+            $this->setModel($oCnqStation);
+        }
+
     }
 
     /**

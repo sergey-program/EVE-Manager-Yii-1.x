@@ -38,8 +38,6 @@ class MarketOrdersController extends AbstractController
      */
     public function actionStation($sCharacterID, $sStationID)
     {
-
-
         $aData = array(
             'cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID),
             'cStation' => cLoaderStation::byStationID($sStationID)

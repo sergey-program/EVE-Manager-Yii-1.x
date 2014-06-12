@@ -11,6 +11,7 @@ return array(
     'application.call.*',
     'application.call.account.*',
     'application.call.character.*',
+    'application.call.eve.*',
     //
     'application.widgets._extend.*',
     'application.widgets.*',

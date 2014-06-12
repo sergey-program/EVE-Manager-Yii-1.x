@@ -12,11 +12,11 @@
             <!-- panel -->
             <?php if ($cCharacter->getOrdersCount()): ?>
                 <ul class="list-group">
-                    <?php foreach ($cCharacter->getOrdersAsStation() as $cStation): ?>
+                    <?php foreach ($cCharacter->getOrders(cLoaderOrder::AS_STATION) as $cStation): ?>
                         <li class="list-group-item">
                             <span class="badge"><?php echo $cStation->getOrdersCount(); ?></span>
-                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getStationID(); ?>_32.png">
-                            <a href="<?php echo Yii::app()->createUrl('marketOrders/station', array('sCharacterID' => $cCharacter->getCharacterID(), 'sStationID' => $cStation->getStationID())); ?>"><?php echo $cStation->getStationID(); ?></a>
+                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getTypeID(); ?>_32.png">
+                            <a href="<?php echo Yii::app()->createUrl('marketOrders/station', array('sCharacterID' => $cCharacter->getCharacterID(), 'sStationID' => $cStation->getStationID())); ?>"><?php echo $cStation->getStationName(); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
