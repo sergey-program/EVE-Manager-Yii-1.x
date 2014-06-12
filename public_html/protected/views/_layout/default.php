@@ -51,7 +51,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Update All <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo Yii::app()->createUrl('marketOrders/update'); ?>">Orders</a></li>
-                        <li><a href="<?php echo Yii::app()->createUrl('cnqStation/update'); ?>">Conquerable Station List</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('cnqStation/list'); ?>">Conquerable Station List</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Separated link</a></li>

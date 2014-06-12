@@ -12,8 +12,12 @@ return array(
     'character/list'            => 'character/list',
 
     'market-orders/update'      => 'marketOrders/update',
-    'character/<sCharacterID:\d+>/market-orders'                            => 'marketOrders/character',
-    'character/<sCharacterID:\d+>/market-orders/station/<sStationID:\d+>'   => 'marketOrders/station',
+    // market orders
+    'character/<sCharacterID:\d+>/market/order'                            => 'market/order/character',
+    'character/<sCharacterID:\d+>/market/order/station/<sStationID:\d+>'   => 'market/order/station',
+    // market demands
+    'character/<sCharacterID:\d+>/market/demand'                            => 'market/demand/character',
+    'character/<sCharacterID:\d+>/market/demand/station/<sStationID:\d+>'   => 'market/demand/station',
 
     'update/static/conquerable-station-list'    => 'cnqStation/update'
 );

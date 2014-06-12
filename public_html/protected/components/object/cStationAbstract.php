@@ -1,28 +1,31 @@
 <?php
 
-class cStationAbstract
+class cStationAbstract extends cObjectAbstract implements cObjectInterface
 {
-    protected $sStationID;
-    protected $oStation;
     protected $aOrder = array();
+    protected $aDemand = array();
 
     /**
-     * @param string|int|null $sStationID
+     * @param StaStation|ConquerableStation $oModel
+     *
+     * @return $this
      */
-    public function __construct($sStationID = null)
+    public function setModel($oModel)
     {
-        if (!is_null($sStationID)) {
-            $this->sStationID = $sStationID;
-            $this->loadModel($sStationID);
+        if ($oModel instanceof StaStation || $oModel instanceof ConquerableStation) {
+            $this->oModel = $oModel;
         }
+
+        return $this;
     }
 
     /**
+     * @param string|int $sStationID
      *
+     * @return $this
      */
-    private function loadModel($sStationID = null)
+    public function loadModel($sStationID)
     {
-        $sStationID = ($sStationID) ? $sStationID : $this->sStationID;
         $oStaStation = StaStation::model()->findByAttributes(array('stationID' => $sStationID));
 
         if ($oStaStation) {
@@ -35,29 +38,6 @@ class cStationAbstract
             $this->setModel($oCnqStation);
         }
 
-    }
-
-    /**
-     * @param string|int $sStationID
-     *
-     * @return $this
-     */
-    public function setStationID($sStationID)
-    {
-        $this->sStationID = $sStationID;
-
-        return $this;
-    }
-
-    /**
-     * @param CActiveRecord $oStation
-     *
-     * @return $this
-     */
-    public function setModel($oStation)
-    {
-        $this->oStation = $oStation;
-
         return $this;
     }
 
@@ -69,6 +49,18 @@ class cStationAbstract
     public function addOrder(cOrder $oOrder)
     {
         $this->aOrder[] = $oOrder;
+
+        return $this;
+    }
+
+    /**
+     * @param cDemand $oDemand
+     *
+     * @return $this
+     */
+    public function addDemand(cDemand $oDemand)
+    {
+        $this->aDemand[] = $oDemand;
 
         return $this;
     }

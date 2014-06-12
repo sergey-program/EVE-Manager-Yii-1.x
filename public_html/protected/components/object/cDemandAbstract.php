@@ -1,15 +1,15 @@
 <?php
 
-abstract class cCharacterAbstract extends cObjectAbstract implements cObjectInterface
+class cDemandAbstract extends cObjectAbstract implements cObjectInterface
 {
     /**
-     * @param ApiCharacter $oModel
+     * @param MarketDemand $oModel
      *
      * @return $this
      */
     public function setModel($oModel)
     {
-        if ($oModel instanceof ApiCharacter) {
+        if ($oModel instanceof MarketDemand) {
             $this->oModel = $oModel;
         }
 
@@ -23,7 +23,7 @@ abstract class cCharacterAbstract extends cObjectAbstract implements cObjectInte
      */
     public function loadModel($sID)
     {
-        $this->setModel(ApiCharacter::model()->findByAttributes(array('characterID' => $sID)));
+        $this->setModel(MarketDemand::model()->findAllByPk($sID));
 
         return $this;
     }

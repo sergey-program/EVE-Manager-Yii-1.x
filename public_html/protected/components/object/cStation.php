@@ -7,7 +7,7 @@ class cStation extends cStationAbstract
      */
     public function getTypeID()
     {
-        return $this->oStation->stationTypeID;
+        return $this->oModel->stationTypeID;
     }
 
     /**
@@ -15,7 +15,7 @@ class cStation extends cStationAbstract
      */
     public function getStationID()
     {
-        return $this->sStationID;
+        return $this->oModel->stationID;
     }
 
     /**
@@ -23,7 +23,7 @@ class cStation extends cStationAbstract
      */
     public function getStationName()
     {
-        return $this->oStation->stationName;
+        return $this->oModel->stationName;
     }
 
     /**
@@ -32,5 +32,13 @@ class cStation extends cStationAbstract
     public function getOrdersCount()
     {
         return count($this->aOrder);
+    }
+
+    /**
+     * @return int
+     */
+    public function getDemandsCount()
+    {
+        return count($this->aDemand);
     }
 }

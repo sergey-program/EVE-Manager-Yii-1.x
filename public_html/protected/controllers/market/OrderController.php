@@ -1,6 +1,6 @@
 <?php
 
-class MarketOrdersController extends AbstractController
+class OrderController extends AbstractController
 {
     /**
      *
@@ -39,8 +39,8 @@ class MarketOrdersController extends AbstractController
     public function actionStation($sCharacterID, $sStationID)
     {
         $aData = array(
-            'cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID),
-            'cStation' => cLoaderStation::byStationID($sStationID)
+            'cCharacter' => new cCharacter($sCharacterID),
+            'cStation' => new cStation($sStationID)
         );
 
         $this->render('station', $aData);
@@ -52,7 +52,7 @@ class MarketOrdersController extends AbstractController
     public function actionCharacter($sCharacterID)
     {
         $aData = array(
-            'cCharacter' => cLoaderCharacter::byCharacterID($sCharacterID)
+            'cCharacter' => new cCharacter($sCharacterID)
         );
 
         $this->render('character', $aData);

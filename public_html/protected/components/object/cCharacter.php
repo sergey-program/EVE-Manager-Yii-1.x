@@ -7,7 +7,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getCharacterID()
     {
-        return $this->oCharacter->characterID;
+        return $this->oModel->characterID;
     }
 
     /**
@@ -15,7 +15,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getCharacterName()
     {
-        return $this->oCharacter->characterName;
+        return $this->oModel->characterName;
     }
 
     /**
@@ -23,7 +23,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getCorporationID()
     {
-        return $this->oCharacter->corporationID;
+        return $this->oModel->corporationID;
     }
 
     /**
@@ -31,7 +31,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getCorporationName()
     {
-        return $this->oCharacter->corporationName;
+        return $this->oModel->corporationName;
     }
 
     /**
@@ -39,7 +39,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getAllianceID()
     {
-        return $this->oCharacter->allianceID;
+        return $this->oModel->allianceID;
     }
 
     /**
@@ -47,7 +47,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getAllianceName()
     {
-        return $this->oCharacter->allianceName;
+        return $this->oModel->allianceName;
     }
 
     /**
@@ -55,7 +55,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getFactionID()
     {
-        return $this->oCharacter->factionID;
+        return $this->oModel->factionID;
     }
 
     /**
@@ -63,24 +63,43 @@ class cCharacter extends cCharacterAbstract
      */
     public function getFactionName()
     {
-        return $this->oCharacter->factionName;
+        return $this->oModel->factionName;
     }
 
     /**
-     * @param string          $sType      Return type can be cLoaderOrder::AS_LIST or cLoaderOrder::AS_STATION.
-     * @param string|int|null $sStationID Filter for station.
+     * List of orders;
+     *
+     * @param string|int|null $sStationID Filter for station;
      *
      * @return array
      */
-    public function getOrders($sType, $sStationID = null)
+    public function getOrders($sStationID = null)
     {
-        $cLoaderOrder = new cLoaderOrder();
-        $cLoaderOrder
+        $clOrder = new clOrder();
+        $clOrder
             ->setCharacterID($this->getCharacterID())
             ->setStationID($sStationID)
-            ->setResultAs($sType);
+            ->setResultAs(clOrder::AS_LIST);
 
-        return $cLoaderOrder->getAll();
+        return $clOrder->load();
+    }
+
+    /**
+     * List of demands;
+     *
+     * @param string|int|null $sStationID Filter for station;
+     *
+     * @return array
+     */
+    public function getDemands($sStationID = null)
+    {
+        $clDemand = new clDemand();
+        $clDemand
+            ->setCharacterID($this->getCharacterID())
+            ->setStationID($sStationID)
+            ->setResultAs(clDemand::AS_LIST);
+
+        return $clDemand->load();
     }
 
     /**
@@ -97,5 +116,52 @@ class cCharacter extends cCharacterAbstract
         }
 
         return MarketOrder::model()->countByAttributes($aAttributes);
+    }
+
+
+    /**
+     * @param string|int|null $sStationID
+     *
+     * @return string|int
+     */
+    public function getDemandsCount($sStationID = null)
+    {
+        $aAttributes = array('characterID' => $this->getCharacterID());
+
+        if ($sStationID) {
+            $aAttributes['stationID'] = $sStationID;
+        }
+
+        return MarketDemand::model()->countByAttributes($aAttributes);
+    }
+
+    /**
+     * List of stations where character has orders;
+     *
+     * @return array
+     */
+    public function getOrdersAsStationList()
+    {
+        $clOrder = new clOrder();
+        $clOrder
+            ->setCharacterID($this->getCharacterID())
+            ->setResultAs(clOrder::AS_STATION);
+
+        return $clOrder->load();
+    }
+
+    /**
+     * List of stations where character has demands;
+     *
+     * @return array
+     */
+    public function getDemandsAsStationList()
+    {
+        $clDemand = new clDemand();
+        $clDemand
+            ->setCharacterID($this->getCharacterID())
+            ->setResultAs(clDemand::AS_STATION);
+
+        return $clDemand->load();
     }
 }
