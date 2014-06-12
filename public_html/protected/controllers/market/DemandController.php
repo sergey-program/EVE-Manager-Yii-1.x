@@ -7,7 +7,9 @@ class DemandController extends AbstractController
      */
     public function actionCharacter($sCharacterID)
     {
+        $oLocation = new MarketLocation('create');
         $aData = array(
+            'oLocation' => $oLocation,
             'cCharacter' => new cCharacter($sCharacterID)
         );
 

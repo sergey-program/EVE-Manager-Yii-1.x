@@ -10,6 +10,10 @@
 
     <script type="text/javascript" src="/public/js/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/public/js/select2-3.4.8/select2.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/js/select2-3.4.8/select2.css" media="screen, projection"/>
+    <link rel="stylesheet" type="text/css" href="/public/js/select2-3.4.8/select2-bootstrap.css" media="screen, projection"/>
 </head>
 
 <body>

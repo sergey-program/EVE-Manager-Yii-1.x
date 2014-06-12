@@ -1,17 +1,14 @@
 <?php
 
-class ApiCharacter extends AbstractModel
+class ConquerableStation extends AbstractModel
 {
     public $id;
-    public $apiID;
-    public $characterID;
-    public $characterName;
+    public $stationID;
+    public $stationName;
+    public $stationTypeID;
+    public $solarSystemID;
     public $corporationID;
     public $corporationName;
-    public $allianceID;
-    public $allianceName;
-    public $factionID;
-    public $factionName;
 
     /**
      * @param string $sClass
@@ -28,7 +25,7 @@ class ApiCharacter extends AbstractModel
      */
     public function tableName()
     {
-        return '_api_character';
+        return 'api_common_conquerableStationList';
     }
 
     /**
@@ -37,9 +34,7 @@ class ApiCharacter extends AbstractModel
     public function rules()
     {
         return array(
-            // create
-            array('apiID, characterID, characterName, corporationID, corporationName', 'required', 'on' => 'create'),
-            array('allianceID, allianceName, factionID, factionName', 'safe', 'on' => 'create')
+            array('stationID, stationName, stationTypeID, solarSystemID, corporationID, corporationName', 'required', 'on' => 'create')
         );
     }
 
@@ -56,8 +51,6 @@ class ApiCharacter extends AbstractModel
      */
     public function relations()
     {
-        return array(
-            'oApi' => array(self::BELONGS_TO, 'Api', 'apiID')
-        );
+        return array();
     }
 }

@@ -41,7 +41,7 @@ class MarketOrder extends AbstractModel
      */
     public function tableName()
     {
-        return '_market_order';
+        return 'api_character_marketOrders';
     }
 
     /**

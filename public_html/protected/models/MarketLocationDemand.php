@@ -1,12 +1,12 @@
 <?php
 
-class ApiInfo extends AbstractModel
+class MarketDemand extends AbstractModel
 {
     public $id;
-    public $apiID;
-    public $accessMask;
-    public $type;
-    public $expires;
+    public $characterID;
+    public $stationID;
+    public $typeID;
+    public $quantity;
 
     /**
      * @param string $sClass
@@ -23,7 +23,7 @@ class ApiInfo extends AbstractModel
      */
     public function tableName()
     {
-        return '_api_info';
+        return '{{market_location_demand}}';
     }
 
     /**
@@ -31,11 +31,15 @@ class ApiInfo extends AbstractModel
      */
     public function rules()
     {
-        return array(
-            // create
-            array('apiID, accessMask, type', 'required', 'on' => 'create'),
-            array('expires', 'safe', 'on' => 'create')
-        );
+        return array();
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return array();
     }
 
     /**
@@ -43,8 +47,6 @@ class ApiInfo extends AbstractModel
      */
     public function relations()
     {
-        return array(
-            'oApi' => array(self::BELONGS_TO, 'Api', 'apiID')
-        );
+        return array();
     }
 }

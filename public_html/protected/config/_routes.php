@@ -19,5 +19,7 @@ return array(
     'character/<sCharacterID:\d+>/market/demand'                            => 'market/demand/character',
     'character/<sCharacterID:\d+>/market/demand/station/<sStationID:\d+>'   => 'market/demand/station',
 
-    'update/static/conquerable-station-list'    => 'cnqStation/update'
+    'update/static/conquerable-station-list'    => 'cnqStation/update',
+
+    'ajax/findStation'=>'ajax/findStation'
 );

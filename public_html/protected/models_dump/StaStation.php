@@ -1,20 +1,25 @@
 <?php
 
-class InvTypes extends AbstractModel
+class StaStation extends AbstractModel
 {
-    public $typeID;
-    public $groupID;
-    public $typeName;
-    public $description;
-    public $mass;
-    public $volume;
-    public $capacity;
-    public $portionSize;
-    public $raceID;
-    public $basePrice;
-    public $published;
-    public $marketGroupID;
-    public $chanceOfDuplicating;
+    public $stationID;
+    public $security;
+    public $dockingCostPerVolume;
+    public $maxShipVolumeDockable;
+    public $officeRentalCost;
+    public $operationID;
+    public $stationTypeID;
+    public $corporationID;
+    public $solarSystemID;
+    public $constellationID;
+    public $regionID;
+    public $stationName;
+    public $x;
+    public $y;
+    public $z;
+    public $reprocessingEfficiency;
+    public $reprocessingStationsTake;
+    public $reprocessingHangarFlag;
 
     /**
      * @param string $sClass
@@ -31,7 +36,7 @@ class InvTypes extends AbstractModel
      */
     public function tableName()
     {
-        return 'invTypes';
+        return 'dump_staStations';
     }
 
     /**

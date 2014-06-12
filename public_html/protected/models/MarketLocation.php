@@ -1,12 +1,10 @@
 <?php
 
-class MarketDemand extends AbstractModel
+class MarketLocation extends AbstractModel
 {
     public $id;
     public $characterID;
     public $stationID;
-    public $typeID;
-    public $quantity;
 
     /**
      * @param string $sClass
@@ -23,7 +21,7 @@ class MarketDemand extends AbstractModel
      */
     public function tableName()
     {
-        return '_market_demand';
+        return '{{market_location}}';
     }
 
     /**
@@ -31,7 +29,9 @@ class MarketDemand extends AbstractModel
      */
     public function rules()
     {
-        return array();
+        return array(
+            array('characterID, stationID', 'required', 'on' => 'create')
+        );
     }
 
     /**
