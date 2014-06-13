@@ -1,6 +1,6 @@
 <?php
 
-class ApiInfo extends AbstractModel
+class ApiAccountApiKeyInfo extends AbstractModel
 {
     public $id;
     public $apiID;

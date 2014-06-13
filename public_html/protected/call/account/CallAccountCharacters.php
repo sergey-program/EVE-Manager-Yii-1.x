@@ -42,12 +42,12 @@ class CallAccountCharacters extends CallAbstract implements CallInterface
             $sApiID = $this->getStorage()->getVar('apiID');
 
             foreach ($this->aData as $aCharacter) {
-                $oCharacter = ApiCharacter::model()->findByAttributes(array('characterID' => $aCharacter['characterID'], 'apiID' => $sApiID));
+                $oCharacter = ApiAccountCharacters::model()->findByAttributes(array('characterID' => $aCharacter['characterID'], 'apiID' => $sApiID));
 
                 if ($oCharacter) {
                     $oCharacter->setScenario('create');
                 } else {
-                    $oCharacter = new ApiCharacter('create');
+                    $oCharacter = new ApiAccountCharacters('create');
                 }
 
                 $oCharacter->attributes = array(

@@ -1,13 +1,43 @@
 <?php
 
-class cOrder extends cOrderAbstract
+class cOrder extends cObjectAbstract implements cObjectInterface
 {
+    /**
+     * Assign already loaded model;
+     *
+     * @param ApiCharacterMarketOrders $oModel
+     *
+     * @return $this
+     */
+    public function setModel($oModel)
+    {
+        if ($oModel instanceof ApiCharacterMarketOrders) {
+            $this->oModel = $oModel;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Load by orderID;
+     *
+     * @param string|int $sID
+     *
+     * @return $this
+     */
+    public function loadModel($sID)
+    {
+        $this->setModel(ApiCharacterMarketOrders::model()->findByAttributes(array('orderID' => $sID)));
+
+        return $this;
+    }
+
     /**
      * @return string|int
      */
     public function getOrderID()
     {
-        return $this->oOrder->orderID;
+        return $this->oModel->orderID;
     }
 
     /**
@@ -15,7 +45,7 @@ class cOrder extends cOrderAbstract
      */
     public function getTypeID()
     {
-        return $this->oOrder->typeID;
+        return $this->oModel->typeID;
     }
 
     /**
@@ -23,7 +53,7 @@ class cOrder extends cOrderAbstract
      */
     public function getTypeName()
     {
-        return $this->oOrder->oInvTypes->typeName;
+        return $this->oModel->oInvTypes->typeName;
     }
 
     /**
@@ -31,7 +61,23 @@ class cOrder extends cOrderAbstract
      */
     public function getStationID()
     {
-        return $this->oOrder->stationID;
+        return $this->oModel->stationID;
+    }
+
+    /**
+     * @return string|int
+     */
+    public function getVolEntered()
+    {
+        return $this->oModel->volEntered;
+    }
+
+    /**
+     * @return string|int
+     */
+    public function getVolRemaining()
+    {
+        return $this->oModel->volRemaining;
     }
 
 }

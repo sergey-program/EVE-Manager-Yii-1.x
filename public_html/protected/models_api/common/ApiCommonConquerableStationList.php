@@ -1,6 +1,6 @@
 <?php
 
-class ConquerableStation extends AbstractModel
+class ApiCommonConquerableStationList extends AbstractModel
 {
     public $id;
     public $stationID;

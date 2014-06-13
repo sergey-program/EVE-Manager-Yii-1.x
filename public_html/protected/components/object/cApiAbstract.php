@@ -1,66 +1,29 @@
 <?php
 
-abstract class cApiAbstract
+abstract class cApiAbstract extends cObjectAbstract implements cObjectInterface
 {
-    protected $oApi;
-    protected $oInfo;
-    protected $aCharacter = array();
-
     /**
-     * Can assign model on create;
-     *
-     * @param Api $oApi
-     */
-    public function __construct(Api $oApi = null)
-    {
-        if (!is_null($oApi)) {
-            $this->setModel($oApi);
-        }
-    }
-
-    /**
-     * Custom set model;
-     *
-     * @param Api $oApi
+     * @param Api $oModel
      *
      * @return $this
      */
-    public function setModel(Api $oApi)
+    public function setModel($oModel)
     {
-        $this->oApi = $oApi;
-        $this
-            ->loadCharacters()
-            ->loadInfo();
-
-        return $this;
-    }
-
-    /**
-     * Assign characters;
-     *
-     * @return $this
-     */
-    protected function loadCharacters()
-    {
-        if ($this->oApi->aCharacter) {
-            foreach ($this->oApi->aCharacter as $oCharacter) {
-                $this->aCharacter[] = new cCharacter($oCharacter);
-            }
+        if ($oModel instanceof Api) {
+            $this->oModel = $oModel;
         }
 
         return $this;
     }
 
     /**
-     * Assign api info;
+     * @param string|int $sID
      *
      * @return $this
      */
-    protected function loadInfo()
+    public function loadModel($sID)
     {
-        if ($this->oApi->oInfo) {
-            $this->oInfo = $this->oApi->oInfo;
-        }
+        $this->setModel(Api::model()->findByAttributes(array('keyID' => $sID)));
 
         return $this;
     }
@@ -70,7 +33,7 @@ abstract class cApiAbstract
      */
     public function hasCharacters()
     {
-        return !empty($this->aCharacter);
+        return !empty($this->oModel->aCharacter);
     }
 
     /**
@@ -78,14 +41,6 @@ abstract class cApiAbstract
      */
     public function hasInfo()
     {
-        return !empty($this->oInfo);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isUpdated()
-    {
-        return true;
+        return !empty($this->oModel->oApiKeyInfo);
     }
 }

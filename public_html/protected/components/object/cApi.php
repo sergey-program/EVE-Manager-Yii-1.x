@@ -7,7 +7,7 @@ class cApi extends cApiAbstract
      */
     public function getID()
     {
-        return $this->oApi->id;
+        return $this->oModel->id;
     }
 
     /**
@@ -15,7 +15,7 @@ class cApi extends cApiAbstract
      */
     public function getKeyID()
     {
-        return $this->oApi->keyID;
+        return $this->oModel->keyID;
     }
 
     /**
@@ -23,7 +23,7 @@ class cApi extends cApiAbstract
      */
     public function getVCode()
     {
-        return $this->oApi->vCode;
+        return $this->oModel->vCode;
     }
 
     /**
@@ -31,7 +31,13 @@ class cApi extends cApiAbstract
      */
     public function getCharacters()
     {
-        return $this->aCharacter;
+        $aReturn = array();
+
+        foreach ($this->oModel->aCharacter as $oCharacter) {
+            $aReturn[] = new cCharacter($oCharacter);
+        }
+
+        return $aReturn;
     }
 
     /**
@@ -39,7 +45,7 @@ class cApi extends cApiAbstract
      */
     public function getAccessMask()
     {
-        return ($this->hasInfo()) ? $this->oInfo->accessMask : null;
+        return ($this->hasInfo()) ? $this->oModel->oApiKeyInfo->accessMask : null;
     }
 
     /**
@@ -47,7 +53,7 @@ class cApi extends cApiAbstract
      */
     public function getType()
     {
-        return ($this->hasInfo()) ? $this->oInfo->type : null;
+        return ($this->hasInfo()) ? $this->oModel->oApiKeyInfo->type : null;
     }
 
     /**
@@ -55,6 +61,6 @@ class cApi extends cApiAbstract
      */
     public function getExpires()
     {
-        return ($this->hasInfo()) ? $this->oInfo->expires : null;
+        return ($this->hasInfo()) ? $this->oModel->oApiKeyInfo->expires : null;
     }
 }

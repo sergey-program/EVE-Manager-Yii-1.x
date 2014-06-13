@@ -1,6 +1,6 @@
 <?php
 
-class ApiCharacter extends AbstractModel
+class ApiAccountCharacters extends AbstractModel
 {
     public $id;
     public $apiID;

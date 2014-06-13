@@ -2,90 +2,49 @@
 
 class clOrder
 {
-    const AS_STATION = 'as_station';
-    const AS_LIST = 'as_list';
-
-    private $sCharacterID;
-    private $sStationID;
-    private $sResultAs;
-
     /**
-     * @param string|int|null $sCharacterID
+     * Return array of orders;
+     *
+     * @param string|int      $sCharacterID
      * @param string|int|null $sStationID
-     * @param string|null     $sResultAs
-     */
-    public function __construct($sCharacterID = null, $sStationID = null, $sResultAs = self::AS_LIST)
-    {
-        $this
-            ->setCharacterID($sCharacterID)
-            ->setStationID($sStationID)
-            ->setResultAs($sResultAs);
-    }
-
-    /**
-     * @param string|int $sCharacterID
      *
-     * @return $this
+     * @return array
      */
-    public function setCharacterID($sCharacterID)
+    public static function loadAllAsList($sCharacterID, $sStationID = null)
     {
-        $this->sCharacterID = $sCharacterID;
+        $aReturn = array();
+        $aAttr = array('characterID' => $sCharacterID, 'orderState' => ApiCharacterMarketOrders::ORDER_STATE_OPEN);
 
-        return $this;
-    }
-
-    /**
-     * @param string|int $sStationID
-     *
-     * @return $this
-     */
-    public function setStationID($sStationID)
-    {
-        $this->sStationID = $sStationID;
-
-        return $this;
-    }
-
-    /**
-     * @param string $sResultAs
-     *
-     * @return $this
-     */
-    public function setResultAs($sResultAs)
-    {
-        $this->sResultAs = $sResultAs;
-
-        return $this;
-    }
-
-    /**
-     * @return array (cOrder|cStation)
-     */
-    public function load()
-    {
-        $aResult = array();
-        $aAttributes = array('characterID' => $this->sCharacterID, 'orderState' => MarketOrder::ORDER_STATE_OPEN);
-
-        if ($this->sStationID) {
-            $aAttributes['stationID'] = $this->sStationID;
+        if ($sStationID) {
+            $aAttributes['stationID'] = $sStationID;
         }
 
-        $aOrder = MarketOrder::model()->findAllByAttributes($aAttributes);
+        $aOrder = ApiCharacterMarketOrders::model()->findAllByAttributes($aAttr);
 
         foreach ($aOrder as $oOrder) {
-            $cOrder = new cOrder($oOrder);
-
-            if ($this->sResultAs === self::AS_STATION) {
-                if (!isset($aResult[$cOrder->getStationID()])) {
-                    $aResult[$cOrder->getStationID()] = new cStation($cOrder->getStationID());
-                }
-
-                $aResult[$cOrder->getStationID()]->addOrder($cOrder);
-            } elseif ($this->sResultAs === self::AS_LIST) {
-                $aResult[] = $cOrder;
-            }
+            $aReturn[] = new cOrder($oOrder);
         }
 
-        return $aResult;
+        return $aReturn;
+    }
+
+    /**
+     * Return array of cStation components;
+     *
+     * @param string $sCharacterID
+     *
+     * @return array
+     */
+    public static function loadAllAsStationList($sCharacterID)
+    {
+        $aReturn = array();
+        $aAttr = array('characterID' => $sCharacterID, 'orderState' => ApiCharacterMarketOrders::ORDER_STATE_OPEN);
+        $aOrder = ApiCharacterMarketOrders::model()->findAllByAttributes($aAttr, array('group' => 'stationID'));
+
+        foreach ($aOrder as $oOrder) {
+            $aReturn[] = new cStation($oOrder->stationID);
+        }
+
+        return $aReturn;
     }
 }

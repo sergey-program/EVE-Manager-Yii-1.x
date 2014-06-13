@@ -14,8 +14,8 @@
                 <ul class="list-group">
                     <?php foreach ($cCharacter->getOrdersAsStationList() as $cStation): ?>
                         <li class="list-group-item">
-                            <span class="badge"><?php echo $cStation->getOrdersCount(); ?></span>
-                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getTypeID(); ?>_32.png">
+                            <span class="badge"><?php echo $cStation->getOrdersCount($cCharacter->getCharacterID()); ?></span>
+                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getStationTypeID(); ?>_32.png">
                             <a href="<?php echo Yii::app()->createUrl('market/order/station', array('sCharacterID' => $cCharacter->getCharacterID(), 'sStationID' => $cStation->getStationID())); ?>"><?php echo $cStation->getStationName(); ?></a>
                         </li>
                     <?php endforeach; ?>

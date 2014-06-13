@@ -51,8 +51,8 @@ class Api extends AbstractModel
     public function relations()
     {
         return array(
-            'aCharacter' => array(self::HAS_MANY, 'ApiCharacter', 'apiID'),
-            'oInfo' => array(self::HAS_ONE, 'ApiInfo', 'apiID')
+            'aCharacter' => array(self::HAS_MANY, 'ApiAccountCharacters', 'apiID'),
+            'oApiKeyInfo' => array(self::HAS_ONE, 'ApiAccountApiKeyInfo', 'apiID')
         );
     }
 
@@ -65,8 +65,8 @@ class Api extends AbstractModel
             $oCharacter->delete();
         }
 
-        if ($this->oInfo) {
-            $this->oInfo->delete();
+        if ($this->oApiKeyInfo) {
+            $this->oApiKeyInfo->delete();
         }
 
         parent::afterDelete();

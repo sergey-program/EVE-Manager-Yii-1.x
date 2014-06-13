@@ -2,11 +2,15 @@
 
 class MarketDemand extends AbstractModel
 {
+    const TYPE_SELL = 'sell';
+    const TYPE_BUY = 'buy';
+
     public $id;
     public $characterID;
     public $stationID;
     public $typeID;
     public $quantity;
+    public $demandType;
 
     /**
      * @param string $sClass
@@ -23,7 +27,7 @@ class MarketDemand extends AbstractModel
      */
     public function tableName()
     {
-        return '{{market_location_demand}}';
+        return '{{market_demand}}';
     }
 
     /**
@@ -31,7 +35,9 @@ class MarketDemand extends AbstractModel
      */
     public function rules()
     {
-        return array();
+        return array(
+            array('characterID, stationID, typeID, quantity, demandType', 'required', 'on' => 'create')
+        );
     }
 
     /**

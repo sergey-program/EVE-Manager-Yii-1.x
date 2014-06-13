@@ -21,16 +21,28 @@ class ApiController extends AbstractController
     }
 
     /**
+     * @param string|int $sApiID
+     */
+    public function actionDelete($sApiID)
+    {
+        $oApi = Api::model()->findByPk($sApiID);
+
+        if ($oApi) {
+            $this->setFlash('success', 'Api was deleted.');
+            $oApi->delete();
+        } else {
+            $this->setFlash('danger', 'Such api doesn\'t exist.');
+        }
+
+        $this->redirect($this->createUrl('api/list'));
+    }
+
+    /**
      *
      */
     public function actionList()
     {
-        $clApi = new clApi();
-        $aData = array(
-            'cApiList' => $clApi->load()
-        );
-
-        $this->render('list', $aData);
+        $this->render('list', array('aApi' => clApi::loadAll()));
     }
 
     /**
@@ -64,23 +76,6 @@ class ApiController extends AbstractController
                 ->doUpdate();
 
             $this->setFlash('success', 'Api #' . $oApi->id . ' was updated.');
-        } else {
-            $this->setFlash('danger', 'Such api doesn\'t exist.');
-        }
-
-        $this->redirect($this->createUrl('api/list'));
-    }
-
-    /**
-     * @param string|int $sApiID
-     */
-    public function actionDelete($sApiID)
-    {
-        $oApi = Api::model()->findByPk($sApiID);
-
-        if ($oApi) {
-            $this->setFlash('success', 'Api was deleted.');
-            $oApi->delete();
         } else {
             $this->setFlash('danger', 'Such api doesn\'t exist.');
         }

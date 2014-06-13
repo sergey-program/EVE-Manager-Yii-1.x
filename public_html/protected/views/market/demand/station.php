@@ -12,17 +12,17 @@
             <!-- panel -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getTypeID(); ?>_32.png">
+                    <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getStationTypeID(); ?>_32.png">
                     <?php echo $cStation->getStationName(); ?>
                 </div>
             </div>
             <!-- panel -->
-            <?php if ($cCharacter->getOrdersCount($cStation->getStationID())): ?>
+            <?php if ($cCharacter->getDemandsCount($cStation->getStationID())): ?>
                 <ul class="list-group">
-                    <?php foreach ($cCharacter->getOrders(cLoaderOrder::AS_LIST, $cStation->getStationID()) as $cOrder): ?>
+                    <?php foreach ($cCharacter->getDemands($cStation->getStationID()) as $cDemand): ?>
                         <li class="list-group-item">
-                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cOrder->getTypeID(); ?>_32.png">
-                            <?php echo $cOrder->getTypeName(); ?>
+                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cDemand->getTypeID(); ?>_32.png">
+                            <?php echo $cDemand->getTypeName(); ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

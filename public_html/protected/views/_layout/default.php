@@ -39,7 +39,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Api <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo Yii::app()->createUrl('api/add'); ?>">Add</a></li>
-                        <li><a href="<?php echo Yii::app()->createUrl('api/list'); ?>">Show all</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('api/list'); ?>">List</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -54,7 +54,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Update All <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo Yii::app()->createUrl('marketOrders/update'); ?>">Orders</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('market/order/update'); ?>">Orders</a></li>
                         <li><a href="<?php echo Yii::app()->createUrl('cnqStation/list'); ?>">Conquerable Station List</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li class="divider"></li>

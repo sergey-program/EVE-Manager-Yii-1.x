@@ -1,7 +1,34 @@
 <?php
 
-class cCharacter extends cCharacterAbstract
+class cCharacter extends cObjectAbstract implements cObjectInterface
 {
+    /**
+     * @param ApiAccountCharacters $oModel
+     *
+     * @return $this
+     */
+    public function setModel($oModel)
+    {
+        if ($oModel instanceof ApiAccountCharacters) {
+
+            $this->oModel = $oModel;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string|int $sID
+     *
+     * @return $this
+     */
+    public function loadModel($sID)
+    {
+        $this->setModel(clCharacter::loadOne($sID, false));
+
+        return $this;
+    }
+
     /**
      * @return string|int
      */
@@ -75,13 +102,33 @@ class cCharacter extends cCharacterAbstract
      */
     public function getOrders($sStationID = null)
     {
-        $clOrder = new clOrder();
-        $clOrder
-            ->setCharacterID($this->getCharacterID())
-            ->setStationID($sStationID)
-            ->setResultAs(clOrder::AS_LIST);
+        return clOrder::loadAllAsList($this->getCharacterID(), $sStationID);
+    }
 
-        return $clOrder->load();
+    /**
+     * List of stations where character has orders;
+     *
+     * @return array
+     */
+    public function getOrdersAsStationList()
+    {
+        return clOrder::loadAllAsStationList($this->getCharacterID());
+    }
+
+    /**
+     * @param string|int|null $sStationID
+     *
+     * @return string|int
+     */
+    public function getOrdersCount($sStationID = null)
+    {
+        $aAttr = array('characterID' => $this->getCharacterID(), 'orderState' => 0);
+
+        if ($sStationID) {
+            $aAttr['stationID'] = $sStationID;
+        }
+
+        return ApiCharacterMarketOrders::model()->countByAttributes($aAttr);
     }
 
     /**
@@ -93,61 +140,7 @@ class cCharacter extends cCharacterAbstract
      */
     public function getDemands($sStationID = null)
     {
-        $clDemand = new clDemand();
-        $clDemand
-            ->setCharacterID($this->getCharacterID())
-            ->setStationID($sStationID)
-            ->setResultAs(clDemand::AS_LIST);
-
-        return $clDemand->load();
-    }
-
-    /**
-     * @param string|int|null $sStationID
-     *
-     * @return string|int
-     */
-    public function getOrdersCount($sStationID = null)
-    {
-        $aAttributes = array('characterID' => $this->getCharacterID(), 'orderState' => 0);
-
-        if ($sStationID) {
-            $aAttributes['stationID'] = $sStationID;
-        }
-
-        return MarketOrder::model()->countByAttributes($aAttributes);
-    }
-
-
-    /**
-     * @param string|int|null $sStationID
-     *
-     * @return string|int
-     */
-    public function getDemandsCount($sStationID = null)
-    {
-        $aAttributes = array('characterID' => $this->getCharacterID());
-
-        if ($sStationID) {
-            $aAttributes['stationID'] = $sStationID;
-        }
-
-        return MarketDemand::model()->countByAttributes($aAttributes);
-    }
-
-    /**
-     * List of stations where character has orders;
-     *
-     * @return array
-     */
-    public function getOrdersAsStationList()
-    {
-        $clOrder = new clOrder();
-        $clOrder
-            ->setCharacterID($this->getCharacterID())
-            ->setResultAs(clOrder::AS_STATION);
-
-        return $clOrder->load();
+        return clDemand::loadAllAsList($this->getCharacterID(), $sStationID);
     }
 
     /**
@@ -157,11 +150,23 @@ class cCharacter extends cCharacterAbstract
      */
     public function getDemandsAsStationList()
     {
-        $clDemand = new clDemand();
-        $clDemand
-            ->setCharacterID($this->getCharacterID())
-            ->setResultAs(clDemand::AS_STATION);
-
-        return $clDemand->load();
+        return clDemand::loadAllAsStationList($this->getCharacterID());
     }
+
+    /**
+     * @param string|int|null $sStationID
+     *
+     * @return string|int
+     */
+    public function getDemandsCount($sStationID = null)
+    {
+        $aAttr = array('characterID' => $this->getCharacterID());
+
+        if ($sStationID) {
+            $aAttr['stationID'] = $sStationID;
+        }
+
+        return MarketDemand::model()->countByAttributes($aAttr);
+    }
+
 }

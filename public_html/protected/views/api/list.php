@@ -3,8 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <?php if ($cApiList): ?>
-                <?php foreach ($cApiList as $cApi): ?>
+            <?php if ($aApi): ?>
+                <?php foreach ($aApi as $cApi): ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h1 class="panel-title">

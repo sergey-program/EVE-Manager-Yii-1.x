@@ -7,10 +7,10 @@ class OrderController extends AbstractController
      */
     public function actionUpdate()
     {
-        $cApiLoader = cLoaderApi::all();
+        $clApi = clApi::loadAll();
         $oExecutor = new cCallExecutor();
 
-        foreach ($cApiLoader as $cApi) {
+        foreach ($clApi as $cApi) {
 
             if (!$cApi->hasCharacters()) {
                 continue;
@@ -28,22 +28,12 @@ class OrderController extends AbstractController
             }
         }
 
-        $oExecutor->doFetch()->doParse()->doUpdate();
+        $oExecutor
+            ->doFetch()
+            ->doParse()
+            ->doUpdate();
 
         $this->redirect($this->createUrl('character/list'));
-    }
-
-    /**
-     *
-     */
-    public function actionStation($sCharacterID, $sStationID)
-    {
-        $aData = array(
-            'cCharacter' => new cCharacter($sCharacterID),
-            'cStation' => new cStation($sStationID)
-        );
-
-        $this->render('station', $aData);
     }
 
     /**
@@ -56,5 +46,19 @@ class OrderController extends AbstractController
         );
 
         $this->render('character', $aData);
+    }
+
+    /**
+     * @param string|int $sCharacterID
+     * @param string|int $sStationID
+     */
+    public function actionStation($sCharacterID, $sStationID)
+    {
+        $aData = array(
+            'cCharacter' => new cCharacter($sCharacterID),
+            'cStation' => new cStation($sStationID)
+        );
+
+        $this->render('station', $aData);
     }
 }

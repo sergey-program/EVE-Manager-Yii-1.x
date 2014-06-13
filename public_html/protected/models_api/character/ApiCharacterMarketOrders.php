@@ -1,6 +1,6 @@
 <?php
 
-class MarketOrder extends AbstractModel
+class ApiCharacterMarketOrders extends AbstractModel
 {
     const ORDER_STATE_OPEN = 0; // or active
     const  ORDER_STATE_CLOSED = 1;

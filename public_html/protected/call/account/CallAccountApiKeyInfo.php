@@ -37,12 +37,12 @@ class CallAccountApiKeyInfo extends CallAbstract implements CallInterface
     {
         if (!empty($this->aData) && $this->getStorage()->checkRequire('ApiKeyInfo')) {
             $sApiID = $this->getStorage()->getVar('apiID');
-            $oApiInfo = ApiInfo::model()->findByAttributes(array('apiID' => $sApiID));
+            $oApiInfo = ApiAccountApiKeyInfo::model()->findByAttributes(array('apiID' => $sApiID));
 
             if ($oApiInfo) {
                 $oApiInfo->setScenario('create');
             } else {
-                $oApiInfo = new ApiInfo('create');
+                $oApiInfo = new ApiAccountApiKeyInfo('create');
             }
 
             $oApiInfo->attributes = array(

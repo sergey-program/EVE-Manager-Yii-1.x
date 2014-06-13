@@ -18,7 +18,11 @@ return array(
     //
     'application.models._extend.*',
     'application.models.*',
-    'application.models.dump.*',
+    'application.models_api.account.*',
+    'application.models_api.character.*',
+    'application.models_api.common.*',
+    'application.models_api.corporation.*',
+    'application.models_dump.*',
     //
     'application.forms._extend.*',
     'application.forms.*',

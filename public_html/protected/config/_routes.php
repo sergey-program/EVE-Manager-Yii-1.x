@@ -11,7 +11,7 @@ return array(
 
     'character/list'            => 'character/list',
 
-    'market-orders/update'      => 'marketOrders/update',
+
     // market orders
     'character/<sCharacterID:\d+>/market/order'                            => 'market/order/character',
     'character/<sCharacterID:\d+>/market/order/station/<sStationID:\d+>'   => 'market/order/station',
@@ -20,6 +20,8 @@ return array(
     'character/<sCharacterID:\d+>/market/demand/station/<sStationID:\d+>'   => 'market/demand/station',
 
     'update/static/conquerable-station-list'    => 'cnqStation/update',
+    'update/account/market-orders/'             => 'market/order/update',
 
-    'ajax/findStation'=>'ajax/findStation'
+    'ajax/find-station'     =>'ajax/findStation',
+    'ajax/find-item'        =>'ajax/findItem'
 );

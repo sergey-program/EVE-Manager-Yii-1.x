@@ -7,9 +7,19 @@ class DemandController extends AbstractController
      */
     public function actionCharacter($sCharacterID)
     {
-        $oLocation = new MarketLocation('create');
+        $oDemand = new MarketDemand('create');
+
+        if ($this->isPost('MarketDemand', $oDemand)) {
+            $oDemand->characterID = $sCharacterID;
+
+            if ($oDemand->validate()) {
+                $oDemand->save();
+
+                $this->redirect($this->createUrl('market/demand/character', array('sCharacterID' => $sCharacterID)));
+            }
+        }
         $aData = array(
-            'oLocation' => $oLocation,
+            'oDemand' => $oDemand,
             'cCharacter' => new cCharacter($sCharacterID)
         );
 

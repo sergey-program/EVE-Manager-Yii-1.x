@@ -1,6 +1,6 @@
 <?php
 
-class cObjectAbstract
+abstract class cObjectAbstract
 {
     protected $oModel;
 
