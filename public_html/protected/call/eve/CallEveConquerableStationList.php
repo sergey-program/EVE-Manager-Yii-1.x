@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Class CallEveConquerableStationList
+ *
+ * @todo change class name
+ */
 class CallEveConquerableStationList extends CallAbstract
 {
     protected $sFileType = 'eve';
@@ -39,12 +43,12 @@ class CallEveConquerableStationList extends CallAbstract
     {
         if (!empty($this->aData)) {
             foreach ($this->aData as $aStation) {
-                $oStation = ConquerableStation::model()->findByAttributes(array('stationID' => $aStation['stationID']));
+                $oStation = ApiCommonConquerableStationList::model()->findByAttributes(array('stationID' => $aStation['stationID']));
 
                 if ($oStation) {
                     $oStation->setScenario('create');
                 } else {
-                    $oStation = new ConquerableStation('create');
+                    $oStation = new ApiCommonConquerableStationList('create');
                 }
 
                 $oStation->attributes = array(
