@@ -30,23 +30,48 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <ul class="list-group">
-                                        <li class="list-group-item">Jita Buy: 123 123.12</li>
-                                        <li class="list-group-item">Jita Sell: 123 123.12</li>
-                                        <li class="list-group-item">My Buy: 123 123.12</li>
-                                        <li class="list-group-item">My Sell: 123 123.12</li>
+                                        <li class="list-group-item">
+                                            <span>Jita Buy:</span>
+                                            <div class="pull-right"><?php echo number_format($cDemand->getPriceBuy(), 2, ',', ' '); ?></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>Jita Sell:</span>
+                                            <div class="pull-right"><?php echo number_format($cDemand->getPriceSell(), 2, ',', ' '); ?></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>My Buy:</span>
+                                            <div class="pull-right">
+                                                <span class="text-muted"><small>-<?php echo cPrice::getPercentSell(); ?>%</small></span>
+                                                <?php echo number_format($cDemand->getPriceBuy(true), 2, ',', ' '); ?>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>My Sell:</span>
+                                            <div class="pull-right">
+                                                <span class="text-muted"><small>+<?php echo cPrice::getPercentBuy(); ?>%</small></span>
+                                                <?php echo number_format($cDemand->getPriceSell(true), 2, ',', ' '); ?>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
+                                <!-- col -->
                                 <div class="col-md-6">
                                     <ul class="list-group margin-bottom-0">
-                                        <?php foreach ($cDemand->getOrders($cCharacter->getCharacterID()) as $cOrder): ?>
-                                            <li class="list-group-item list-group-item-info">
-                                                <div class="pull-right"><?php echo $cOrder->getVolRemaining(); ?> / <?php echo $cOrder->getVolEntered(); ?></div>
-                                                <span>#<?php echo $cOrder->getOrderID(); ?></span>
-                                            </li>
-                                        <?php endforeach; ?>
+                                        <?php if ($cDemand->getOrders($cCharacter->getCharacterID())): ?>
+                                            <?php foreach ($cDemand->getOrders($cCharacter->getCharacterID()) as $cOrder): ?>
+                                                <li class="list-group-item list-group-item-info">
+                                                    <div class="pull-right"><?php echo $cOrder->getVolRemaining(); ?> / <?php echo $cOrder->getVolEntered(); ?></div>
+                                                    <span>#<?php echo $cOrder->getOrderID(); ?></span>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <li class="list-group-item list-group-item-danger text-center">no orders</li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
+                                <!-- col -->
                             </div>
+                            <!-- row -->
                         </li>
                     <?php endforeach; ?>
                 </ul>

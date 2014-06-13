@@ -7,6 +7,9 @@ return array(
     'application.components.call.*',
     'application.components.object.*',
     //
+    'application.components.price.*',
+    'application.components.price._extend.*',
+    //
     'application.call._extend.*',
     'application.call.*',
     'application.call.account.*',

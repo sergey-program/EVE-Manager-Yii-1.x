@@ -21,7 +21,7 @@
                 <ul class="list-group">
                     <?php foreach ($cStation->getOrders($cCharacter->getCharacterID()) as $cOrder): ?>
                         <li class="list-group-item">
-                            <div class="pull-right"><?php echo $cOrder->getVolRemaining(); ?> / <?php echo $cOrder->getVolEntered(); ?></div>
+                            <div class="pull-right line-height-42"><?php echo $cOrder->getVolRemaining(); ?> / <?php echo $cOrder->getVolEntered(); ?></div>
                             <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cOrder->getTypeID(); ?>_32.png">
                             <?php echo $cOrder->getTypeName(); ?>
                         </li>

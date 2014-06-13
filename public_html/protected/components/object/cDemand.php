@@ -5,6 +5,8 @@ class cDemand extends cObjectAbstract implements cObjectInterface
     const ORDER_TYPE_BUY = 1;
     const ORDER_TYPE_SELL = 0;
 
+    private $cPrice;
+
     /**
      * @param MarketDemand $oModel
      *
@@ -14,6 +16,7 @@ class cDemand extends cObjectAbstract implements cObjectInterface
     {
         if ($oModel instanceof MarketDemand) {
             $this->oModel = $oModel;
+            $this->loadPrice();
         }
 
         return $this;
@@ -27,6 +30,13 @@ class cDemand extends cObjectAbstract implements cObjectInterface
     public function loadModel($sID)
     {
         $this->setModel(clDemand::loadOne($sID, false));
+
+        return $this;
+    }
+
+    public function loadPrice()
+    {
+        $this->cPrice = clPrice::loadOne($this->getTypeID());
 
         return $this;
     }
@@ -114,5 +124,19 @@ class cDemand extends cObjectAbstract implements cObjectInterface
         }
 
         return $iReturn;
+    }
+
+    public function getPriceSell($bWe = false)
+    {
+        $sMethod = (!$bWe) ? 'getSellMin' : 'getSellWe';
+
+        return $this->cPrice->{$sMethod}();
+    }
+
+    public function getPriceBuy($bWe = false)
+    {
+        $sMethod = (!$bWe) ? 'getBuyMax' : 'getBuyWe';
+
+        return $this->cPrice->{$sMethod}();
     }
 }

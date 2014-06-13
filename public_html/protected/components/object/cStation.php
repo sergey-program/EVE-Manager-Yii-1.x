@@ -73,7 +73,7 @@ class cStation extends cObjectAbstract implements cObjectInterface
      */
     public function getOrdersCount($sCharacterID)
     {
-        $aAttr = array('characterID' => $sCharacterID, 'stationID' => $this->getStationID());
+        $aAttr = array('characterID' => $sCharacterID, 'stationID' => $this->getStationID(),'orderState'=>ApiCharacterMarketOrders::ORDER_STATE_OPEN);
 
         return ApiCharacterMarketOrders::model()->countByAttributes($aAttr);
     }

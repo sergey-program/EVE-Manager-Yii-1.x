@@ -16,7 +16,7 @@ class clOrder
         $aAttr = array('characterID' => $sCharacterID, 'orderState' => ApiCharacterMarketOrders::ORDER_STATE_OPEN);
 
         if ($sStationID) {
-            $aAttributes['stationID'] = $sStationID;
+            $aAttr['stationID'] = $sStationID;
         }
 
         $aOrder = ApiCharacterMarketOrders::model()->findAllByAttributes($aAttr);
