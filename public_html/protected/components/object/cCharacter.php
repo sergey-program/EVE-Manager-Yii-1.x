@@ -155,15 +155,20 @@ class cCharacter extends cObjectAbstract implements cObjectInterface
 
     /**
      * @param string|int|null $sStationID
+     * @param string|null     $sDemandsType
      *
      * @return string|int
      */
-    public function getDemandsCount($sStationID = null)
+    public function getDemandsCount($sStationID = null, $sDemandsType = null)
     {
         $aAttr = array('characterID' => $this->getCharacterID());
 
         if ($sStationID) {
             $aAttr['stationID'] = $sStationID;
+        }
+
+        if ($sDemandsType) {
+            $aAttr['demandType'] = $sDemandsType;
         }
 
         return MarketDemand::model()->countByAttributes($aAttr);

@@ -3,7 +3,7 @@
 class ApiCharacterMarketOrders extends AbstractModel
 {
     const ORDER_STATE_OPEN = 0; // or active
-    const  ORDER_STATE_CLOSED = 1;
+    const ORDER_STATE_CLOSED = 1;
     const ORDER_STATE_EXPIRED = 2; // or fulfilled
     const ORDER_STATE_CANCELLED = 3;
     const ORDER_STATE_PENDING = 4;

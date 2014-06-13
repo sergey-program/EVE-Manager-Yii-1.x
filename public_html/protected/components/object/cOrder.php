@@ -35,6 +35,14 @@ class cOrder extends cObjectAbstract implements cObjectInterface
     /**
      * @return string|int
      */
+    public function getID()
+    {
+        return $this->oModel->id;
+    }
+
+    /**
+     * @return string|int
+     */
     public function getOrderID()
     {
         return $this->oModel->orderID;

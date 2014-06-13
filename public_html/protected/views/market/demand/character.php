@@ -11,22 +11,10 @@
                 </div>
             </div>
             <!-- panel -->
-            <?php if ($cCharacter->getDemandsCount()): ?>
-                <ul class="list-group">
-                    <?php foreach ($cCharacter->getDemandsAsStationList() as $cStation): ?>
-                        <li class="list-group-item">
-                            <span class="badge"><?php echo $cStation->getDemandsCount($cCharacter->getCharacterID()); ?></span>
-                            <img class="img-thumbnail margin-right-15" src="http://image.eveonline.com/Type/<?php echo $cStation->getStationTypeID(); ?>_32.png">
-                            <a href="<?php echo Yii::app()->createUrl('market/demand/station', array('sCharacterID' => $cCharacter->getCharacterID(), 'sStationID' => $cStation->getStationID())); ?>"><?php echo $cStation->getStationName(); ?></a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <p class="alert alert-warning text-center">Has no demands...</p>
-            <?php endif; ?>
         </div>
         <!-- col -->
     </div>
+    <!-- row -->
 
     <!-- add demand -->
     <div class="row">
@@ -59,6 +47,32 @@
                 </div>
             </div>
             <!-- panel -->
+        </div>
+        <!-- col -->
+    </div>
+    <!-- row -->
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <?php if ($cCharacter->getDemandsCount()): ?>
+                <ul class="list-group">
+                    <?php foreach ($cCharacter->getDemandsAsStationList() as $cStation): ?>
+                        <li class="list-group-item">
+                            <span class="badge"><?php echo $cStation->getDemandsCount($cCharacter->getCharacterID()); ?></span>
+                            <div class="dropdown dropdown-inline">
+                                <a href="#" data-toggle="dropdown"><img class="img-thumbnail" src="http://image.eveonline.com/Type/<?php echo $cStation->getStationTypeID(); ?>_32.png"></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Delete location</a></li>
+                                    <li><a href="#">Delete all demands</a></li>
+                                </ul>
+                            </div>
+                            <a class="margin-left-15" href="<?php echo Yii::app()->createUrl('market/demand/station', array('sCharacterID' => $cCharacter->getCharacterID(), 'sStationID' => $cStation->getStationID())); ?>"><?php echo $cStation->getStationName(); ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p class="alert alert-warning text-center">Has no demands...</p>
+            <?php endif; ?>
         </div>
         <!-- col -->
     </div>

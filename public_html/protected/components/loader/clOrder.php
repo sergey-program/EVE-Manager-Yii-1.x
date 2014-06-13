@@ -47,4 +47,31 @@ class clOrder
 
         return $aReturn;
     }
+
+    /**
+     * @param string|int $sCharacterID
+     * @param string|int sTypeID
+     * @param string|int $sStationID
+     * @param int        $sBid
+     *
+     * @return array
+     */
+    public static function loadAllForDemand($sCharacterID, $sTypeID, $sStationID, $sBid)
+    {
+        $aReturn = array();
+        $aAttr = array(
+            'characterID' => $sCharacterID,
+            'typeID' => $sTypeID,
+            'stationID' => $sStationID,
+            'orderState' => ApiCharacterMarketOrders::ORDER_STATE_OPEN,
+            'bid' => $sBid
+        );
+        $aOrder = ApiCharacterMarketOrders::model()->findAllByAttributes($aAttr);
+
+        foreach ($aOrder as $oOrder) {
+            $aReturn[] = new cOrder($oOrder);
+        }
+
+        return $aReturn;
+    }
 }

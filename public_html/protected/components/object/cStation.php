@@ -80,12 +80,28 @@ class cStation extends cObjectAbstract implements cObjectInterface
 
     /**
      * @param string|int $sCharacterID
+     * @param string     $sDemandType
+     *
+     * @return array
+     */
+    public function getDemands($sCharacterID, $sDemandType)
+    {
+        return clDemand::loadAllWithType($sCharacterID, $sDemandType, $this->getStationID());
+    }
+
+    /**
+     * @param string|int  $sCharacterID
+     * @param string|null $sDemandType
      *
      * @return int
      */
-    public function getDemandsCount($sCharacterID)
+    public function getDemandsCount($sCharacterID, $sDemandType = null)
     {
         $aAttr = array('characterID' => $sCharacterID, 'stationID' => $this->getStationID());
+
+        if ($sDemandType) {
+            $aAttr['demandType'] = $sDemandType;
+        }
 
         return MarketDemand::model()->countByAttributes($aAttr);
     }

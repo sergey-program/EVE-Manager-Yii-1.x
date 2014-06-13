@@ -38,6 +38,13 @@
     line-height: 32px !important;
 }
 
+.line-height-32 {
+    line-height: 32px !important;
+}
+.line-height-42 {
+    line-height: 42px !important;
+}
+
 .padding-5-15 {
     padding: 5px 15px !important;
 }
@@ -45,4 +52,8 @@
 /**** theme ****/
 .line-height-32 .glyphicon {
     line-height: 32px !important;
+}
+
+.dropdown-inline {
+    display: inline-block;
 }
