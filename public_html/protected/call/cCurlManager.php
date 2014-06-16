@@ -36,18 +36,20 @@ class cCurlManager implements cCurlManagerInterface
     public function execute()
     {
         $stillRunning = null;
-        // ?!?! execute curl multi
-        do {
+
+        do { // execute curl multi (first run)
             $status = curl_multi_exec($this->hHandle, $stillRunning);
         } while ($status === CURLM_CALL_MULTI_PERFORM);
 
-        // ?!?! do fetch
-        while ($stillRunning && $status == CURLM_OK) {
-            if (curl_multi_select($this->hHandle) != CURLM_CALL_MULTI_PERFORM) {
-                do {
-                    $status = curl_multi_exec($this->hHandle, $stillRunning);
-                } while ($status == CURLM_CALL_MULTI_PERFORM);
+
+        while ($stillRunning && $status == CURLM_OK) { // loop for execution
+            if (curl_multi_select($this->hHandle) === CURLM_CALL_MULTI_PERFORM) {
+                usleep(100);
             }
+
+            do {
+                $status = curl_multi_exec($this->hHandle, $stillRunning);
+            } while ($status == CURLM_CALL_MULTI_PERFORM);
         }
 
         // get content of all calls
