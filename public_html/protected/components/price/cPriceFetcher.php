@@ -8,7 +8,7 @@ class cPriceFetcher implements cPriceFetcherInterface
 
     /**
      * @param int|string|array $typeID
-     * @param int|string       $sSolarSystemID
+     * @param int|string $sSolarSystemID
      */
     public function __construct($typeID = null, $sSolarSystemID = null)
     {
@@ -38,6 +38,14 @@ class cPriceFetcher implements cPriceFetcherInterface
     }
 
     /**
+     * @return int|string
+     */
+    public function getSolarSystemID()
+    {
+        return $this->solarSystemID;
+    }
+
+    /**
      * @param string|int $sSolarSystemID
      *
      * @return $this
@@ -50,19 +58,20 @@ class cPriceFetcher implements cPriceFetcherInterface
     }
 
     /**
-     * @return int|string
-     */
-    public function getSolarSystemID()
-    {
-        return $this->solarSystemID;
-    }
-
-    /**
+     * We use cUrl because of "allow_url_open = false" option (php.ini). By default it's true (on) but some hosting
+     * disable them because xss. So to avoid this we will use curl, without it nothing (at all) will be updated.
+     *
      * @return string
      */
     public function getXmlContent()
     {
-        return file_get_contents($this->getUrl());
+        $hCurl = curl_init();
+        curl_setopt($hCurl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($hCurl, CURLOPT_URL, $this->getUrl());
+        $sContent = curl_exec($hCurl);
+        curl_close($hCurl);
+
+        return $sContent;
     }
 
     /**
